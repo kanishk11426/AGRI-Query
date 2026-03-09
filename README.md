@@ -61,43 +61,78 @@ The graph contains nodes of **8 types**:
 
 ---
 
-## 🚀 Setup & Installation
+## 🚀 Quick Start
 
-### Prerequisites
+### Automated Setup (Recommended)
+
+Run the quick start script to automatically set up your environment:
+
+```bash
+git clone https://github.com/kanishk11426/AGRI-Query.git
+cd AGRI-Query
+./quick_start.sh
+```
+
+This will:
+- Create a virtual environment
+- Install all dependencies
+- Verify your setup
+
+### Manual Setup
+
+#### Prerequisites
 - Python 3.9+
 
-### 1. Clone the repository
+#### 1. Clone the repository
 ```bash
 git clone https://github.com/kanishk11426/AGRI-Query.git
 cd AGRI-Query
 ```
 
-### 2. Create a virtual environment
+#### 2. Create a virtual environment
 ```bash
-python -m venv venv
+python3 -m venv venv
 source venv/bin/activate   # Windows: venv\Scripts\activate
 ```
 
-### 3. Install dependencies
+#### 3. Install dependencies
 ```bash
 pip install -r backend/requirements.txt
 ```
 
-### 4. Start the backend
+#### 4. Verify setup (optional but recommended)
+```bash
+python3 setup_verify.py
+```
+
+#### 5. Start the backend
 ```bash
 uvicorn backend.app:app --reload
 ```
 
-The API is now available at **http://localhost:8000**  
+The API is now available at **http://localhost:8000**
 Interactive docs: **http://localhost:8000/docs**
 
-### 5. Open the frontend
+#### 6. Open the frontend
 Simply open `frontend/index.html` in your browser (no build step required):
 ```bash
 open frontend/index.html          # macOS
 xdg-open frontend/index.html      # Linux
 start frontend/index.html         # Windows
 ```
+
+---
+
+## 🤝 Contributing
+
+Want to contribute to AgriQuery AI? Check out our [**Contributing Guide**](CONTRIBUTING.md) for:
+- Detailed setup instructions
+- Development workflow
+- Code style guidelines
+- Testing procedures
+- Troubleshooting tips
+
+We welcome contributions of all kinds — from bug fixes to new features!
 
 ---
 
@@ -191,7 +226,10 @@ AGRI-Query/
 │   ├── test_knowledge_graph.py
 │   └── test_query_processor.py
 ├── .gitignore
-└── README.md
+├── CONTRIBUTING.md          # Contribution guidelines
+├── README.md                # This file
+├── quick_start.sh           # Automated setup script
+└── setup_verify.py          # Environment verification tool
 ```
 
 ---
