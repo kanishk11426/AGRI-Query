@@ -1,0 +1,228 @@
+/* =========================================================
+   AgriQuery AI – Agriculture-themed stylesheet
+   ========================================================= */
+
+/* ---- Reset / Base ---- */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --green-dark:  #1b5e20;
+  --green-main:  #2e7d32;
+  --green-mid:   #388e3c;
+  --green-light: #a5d6a7;
+  --green-pale:  #e8f5e9;
+  --accent:      #ff8f00;
+  --text-dark:   #1a1a1a;
+  --text-mid:    #424242;
+  --text-light:  #757575;
+  --white:       #ffffff;
+  --shadow:      0 2px 8px rgba(0,0,0,.12);
+  --radius:      12px;
+}
+
+body {
+  font-family: 'Segoe UI', system-ui, sans-serif;
+  background: #f1f8e9;
+  color: var(--text-dark);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ---- Header ---- */
+.header {
+  background: linear-gradient(135deg, var(--green-dark) 0%, var(--green-mid) 100%);
+  color: var(--white);
+  padding: 2rem 1rem;
+  text-align: center;
+  box-shadow: var(--shadow);
+}
+.logo { font-size: 2.4rem; font-weight: 800; letter-spacing: -.5px; }
+.tagline { font-size: .95rem; opacity: .85; margin-top: .4rem; }
+
+/* ---- Main ---- */
+.main {
+  flex: 1;
+  max-width: 880px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* ---- Card ---- */
+.card {
+  background: var(--white);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  box-shadow: var(--shadow);
+}
+
+.section-title {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--green-dark);
+  margin-bottom: 1rem;
+}
+
+/* ---- Query Form ---- */
+.query-form {
+  display: flex;
+  gap: .6rem;
+  flex-wrap: wrap;
+}
+.query-input {
+  flex: 1;
+  min-width: 200px;
+  padding: .75rem 1rem;
+  border: 2px solid var(--green-light);
+  border-radius: 8px;
+  font-size: 1rem;
+  outline: none;
+  transition: border-color .2s;
+}
+.query-input:focus { border-color: var(--green-main); }
+
+.btn-primary {
+  padding: .75rem 1.6rem;
+  background: var(--green-main);
+  color: var(--white);
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background .2s, transform .1s;
+}
+.btn-primary:hover  { background: var(--green-dark); }
+.btn-primary:active { transform: scale(.97); }
+
+/* ---- Loader ---- */
+.loader {
+  display: flex;
+  align-items: center;
+  gap: .6rem;
+  margin-top: .9rem;
+  color: var(--green-main);
+  font-weight: 500;
+}
+.spinner {
+  width: 20px; height: 20px;
+  border: 3px solid var(--green-light);
+  border-top-color: var(--green-main);
+  border-radius: 50%;
+  animation: spin .7s linear infinite;
+  flex-shrink: 0;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ---- Example Queries ---- */
+.examples-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .5rem;
+}
+.example-btn {
+  padding: .45rem .9rem;
+  border: 1.5px solid var(--green-main);
+  background: var(--green-pale);
+  color: var(--green-dark);
+  border-radius: 20px;
+  font-size: .85rem;
+  cursor: pointer;
+  transition: background .15s, color .15s;
+}
+.example-btn:hover { background: var(--green-main); color: var(--white); }
+
+/* ---- Response Section ---- */
+.answer-box {
+  background: var(--green-pale);
+  border-left: 4px solid var(--green-main);
+  border-radius: 8px;
+  padding: 1rem 1.2rem;
+  font-size: .97rem;
+  line-height: 1.7;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.meta-box { margin-top: 1.2rem; }
+.meta-title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--green-dark);
+  margin-bottom: .6rem;
+}
+
+/* Tags */
+.tags { display: flex; flex-wrap: wrap; gap: .45rem; }
+.tag {
+  padding: .3rem .75rem;
+  background: var(--green-light);
+  color: var(--green-dark);
+  border-radius: 14px;
+  font-size: .82rem;
+  font-weight: 600;
+}
+
+/* Relationship table */
+.rel-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: .88rem;
+}
+.rel-table th {
+  background: var(--green-main);
+  color: var(--white);
+  padding: .55rem .8rem;
+  text-align: left;
+}
+.rel-table td { padding: .5rem .8rem; border-bottom: 1px solid #e0e0e0; }
+.rel-table tr:last-child td { border-bottom: none; }
+.rel-table tr:hover td { background: var(--green-pale); }
+
+/* ---- Stats Section ---- */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 1rem;
+}
+.stat-card {
+  background: var(--green-pale);
+  border-radius: 10px;
+  padding: 1rem;
+  text-align: center;
+  border: 1.5px solid var(--green-light);
+}
+.stat-value {
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--green-main);
+}
+.stat-label {
+  font-size: .82rem;
+  color: var(--text-mid);
+  margin-top: .25rem;
+}
+.loading-text { color: var(--text-light); font-size: .9rem; }
+
+/* ---- Footer ---- */
+.footer {
+  background: var(--green-dark);
+  color: rgba(255,255,255,.75);
+  text-align: center;
+  padding: 1rem;
+  font-size: .83rem;
+}
+
+/* ---- Utilities ---- */
+.hidden { display: none !important; }
+
+/* ---- Responsive ---- */
+@media (max-width: 500px) {
+  .logo { font-size: 1.7rem; }
+  .query-form { flex-direction: column; }
+  .btn-primary { width: 100%; }
+}

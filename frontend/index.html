@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AgriQuery AI – Intelligent Agricultural Query System</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- ======== HEADER ======== -->
+  <header class="header">
+    <div class="header-inner">
+      <h1 class="logo">🌾 AgriQuery AI</h1>
+      <p class="tagline">Intelligent Agricultural Query System powered by a Knowledge Graph</p>
+    </div>
+  </header>
+
+  <!-- ======== MAIN ======== -->
+  <main class="main">
+
+    <!-- Query Box -->
+    <section class="query-section card">
+      <h2 class="section-title">Ask a Question</h2>
+      <div class="query-form">
+        <input
+          type="text"
+          id="queryInput"
+          class="query-input"
+          placeholder="e.g. What fertilizer is best for rice?"
+          autocomplete="off"
+        />
+        <button id="queryBtn" class="btn-primary">Ask</button>
+      </div>
+      <!-- Loading -->
+      <div id="loader" class="loader hidden">
+        <span class="spinner"></span> Processing your query…
+      </div>
+    </section>
+
+    <!-- Example Queries -->
+    <section class="examples-section card">
+      <h2 class="section-title">💡 Example Queries</h2>
+      <div class="examples-grid" id="examplesGrid">
+        <button class="example-btn">What fertilizer is best for rice?</button>
+        <button class="example-btn">Which pests affect tomato plants?</button>
+        <button class="example-btn">What diseases affect cotton?</button>
+        <button class="example-btn">Which soil type is suitable for wheat?</button>
+        <button class="example-btn">How to treat leaf blight?</button>
+        <button class="example-btn">Tell me about drip irrigation</button>
+        <button class="example-btn">What crops grow well in clay soil?</button>
+        <button class="example-btn">What causes yellow leaves in paddy?</button>
+      </div>
+    </section>
+
+    <!-- Response Area -->
+    <section id="responseSection" class="response-section card hidden">
+      <h2 class="section-title">🤖 Answer</h2>
+
+      <!-- Answer text -->
+      <div id="answerBox" class="answer-box"></div>
+
+      <!-- Entities found -->
+      <div id="entitiesBox" class="meta-box hidden">
+        <h3 class="meta-title">🔍 Entities Found</h3>
+        <div id="entitiesList" class="tags"></div>
+      </div>
+
+      <!-- Relationships -->
+      <div id="relationshipsBox" class="meta-box hidden">
+        <h3 class="meta-title">🔗 Relationships</h3>
+        <table class="rel-table" id="relTable">
+          <thead>
+            <tr>
+              <th>Source</th>
+              <th>Relationship</th>
+              <th>Target</th>
+            </tr>
+          </thead>
+          <tbody id="relTableBody"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Graph Statistics -->
+    <section class="stats-section card" id="statsSection">
+      <h2 class="section-title">📊 Knowledge Graph Statistics</h2>
+      <div id="statsGrid" class="stats-grid">
+        <p class="loading-text">Loading statistics…</p>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ======== FOOTER ======== -->
+  <footer class="footer">
+    <p>AgriQuery AI &copy; 2024 &mdash; Powered by FastAPI &amp; NetworkX</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
