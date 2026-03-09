@@ -6,7 +6,7 @@ AgriQuery AI is a full-stack application that helps farmers, agronomists, and en
 
 ## ✨ Features
 
-- **Knowledge Graph engine** built with NetworkX containing 50+ agricultural entities and 150+ relationships
+- **Comprehensive Knowledge Graph** with 129 agricultural entities and 366+ relationships covering crops, pests, diseases, and treatments
 - **Natural language query processing** using keyword matching and intent heuristics
 - **FastAPI backend** with auto-generated interactive API docs (`/docs`)
 - **Responsive, agriculture-themed frontend** (HTML + CSS + Vanilla JS)
@@ -37,18 +37,18 @@ FastAPI (backend/app.py)
 
 ## 📚 Knowledge Graph
 
-The graph contains nodes of **8 types**:
+The graph contains **129 entities** across **8 types**:
 
-| Type | Examples |
-|------|---------|
-| Crop | Rice, Wheat, Tomato, Cotton, Maize, Sugarcane, Potato, Soybean … |
-| Soil_Type | Clay, Sandy, Loamy, Black (Regur), Red, Alluvial, Laterite |
-| Fertilizer | Urea, DAP, Potash (MOP), NPK Complex, Vermicompost … |
-| Disease | Leaf Blight, Rust, Powdery Mildew, Wilt, Late Blight … |
-| Pest | Stem Borer, Whitefly, Aphid, Bollworm, Thrips … |
-| Pesticide | Fungicide, Carbendazim, Mancozeb, Bordeaux Mixture … |
-| Irrigation_Method | Drip Irrigation, Flood Irrigation, Sprinkler Irrigation … |
-| Farming_Practice | Crop Rotation, Mulching, Intercropping, Organic Farming … |
+| Type | Count | Examples |
+|------|-------|----------|
+| Crop | 30 | Rice, Wheat, Tomato, Cotton, Mango, Banana, Papaya, Grapes, Citrus, Tea, Coffee, Chilli, Brinjal, Cabbage … |
+| Soil_Type | 7 | Clay, Sandy, Loamy, Black (Regur), Red, Alluvial, Laterite |
+| Fertilizer | 15 | Urea, DAP, NPK Complex, Vermicompost, Compost, Farmyard Manure, Biofertilizer, Boron Fertilizer … |
+| Disease | 20 | Leaf Blight, Rust, Powdery Mildew, Wilt, Late Blight, Anthracnose, Fusarium Wilt, Panama Disease … |
+| Pest | 20 | Stem Borer, Whitefly, Aphid, Bollworm, Armyworm, Jassid, Mealybug, Diamondback Moth, Fruit Fly … |
+| Pesticide | 18 | Fungicide, Insecticide, Neem Oil, Bordeaux Mixture, Bacillus thuringiensis, Trichoderma, Spinosad … |
+| Irrigation_Method | 7 | Drip Irrigation, Flood Irrigation, Sprinkler Irrigation, Furrow Irrigation, Rainwater Harvesting … |
+| Farming_Practice | 12 | Crop Rotation, Mulching, Intercropping, Organic Farming, IPM, Precision Agriculture, Greenhouse … |
 
 **Relationship types:** `requires` · `susceptible_to` · `suitable_for` · `affects` · `treated_by` · `benefits_from` · `grown_in` · `prevented_by`
 
@@ -180,6 +180,12 @@ We welcome contributions of all kinds — from bug fixes to new features!
 | `Tell me about drip irrigation` | Irrigation method details |
 | `What crops grow well in clay soil?` | Soil → Crop (suitable_for) |
 | `What causes yellow leaves in paddy?` | Alias + disease detection |
+| `What fertilizer does mango need?` | New fruit crop query |
+| `Which pests attack banana?` | Tropical crop pest relationships |
+| `How to treat anthracnose in chilli?` | Disease treatment for vegetables |
+| `What is integrated pest management?` | Modern farming practice info |
+| `Which crops benefit from greenhouse farming?` | Advanced farming technique |
+| `How to control diamondback moth in cabbage?` | Biological pest control |
 
 ---
 
