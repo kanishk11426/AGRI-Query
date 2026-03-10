@@ -7,7 +7,10 @@ const API_BASE = "http://localhost:8000";
 // ---------------------------------------------------------------------------
 const queryInput       = document.getElementById("queryInput");
 const queryBtn         = document.getElementById("queryBtn");
+const micBtn           = document.getElementById("micBtn");
+const speakBtn         = document.getElementById("speakBtn");
 const loader           = document.getElementById("loader");
+const voiceStatus      = document.getElementById("voiceStatus");
 const responseSection  = document.getElementById("responseSection");
 const answerBox        = document.getElementById("answerBox");
 const entitiesBox      = document.getElementById("entitiesBox");
@@ -16,6 +19,116 @@ const relationshipsBox = document.getElementById("relationshipsBox");
 const relTableBody     = document.getElementById("relTableBody");
 const statsGrid        = document.getElementById("statsGrid");
 const examplesGrid     = document.getElementById("examplesGrid");
+
+// ---------------------------------------------------------------------------
+// Voice Recognition Setup (Speech-to-Text)
+// ---------------------------------------------------------------------------
+let recognition = null;
+let isRecording = false;
+
+// Initialize Web Speech API if available
+if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
+  const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+  recognition = new SpeechRecognition();
+  recognition.continuous = false;
+  recognition.interimResults = false;
+  recognition.lang = 'en-US';
+
+  recognition.onstart = () => {
+    isRecording = true;
+    micBtn.classList.add('recording');
+    voiceStatus.classList.remove('hidden');
+  };
+
+  recognition.onresult = (event) => {
+    const transcript = event.results[0][0].transcript;
+    queryInput.value = transcript;
+    submitQuery(transcript);
+  };
+
+  recognition.onerror = (event) => {
+    console.error('Speech recognition error:', event.error);
+    stopRecording();
+    if (event.error === 'no-speech') {
+      alert('No speech detected. Please try again.');
+    } else if (event.error === 'not-allowed') {
+      alert('Microphone access denied. Please allow microphone access to use voice input.');
+    } else {
+      alert(`Speech recognition error: ${event.error}`);
+    }
+  };
+
+  recognition.onend = () => {
+    stopRecording();
+  };
+} else {
+  // Hide mic button if Web Speech API is not supported
+  if (micBtn) {
+    micBtn.style.display = 'none';
+  }
+}
+
+function startRecording() {
+  if (recognition && !isRecording) {
+    recognition.start();
+  }
+}
+
+function stopRecording() {
+  isRecording = false;
+  micBtn.classList.remove('recording');
+  voiceStatus.classList.add('hidden');
+}
+
+// ---------------------------------------------------------------------------
+// Text-to-Speech Setup
+// ---------------------------------------------------------------------------
+let isSpeaking = false;
+let currentUtterance = null;
+
+function speakText(text) {
+  if (!('speechSynthesis' in window)) {
+    alert('Text-to-speech is not supported in your browser.');
+    return;
+  }
+
+  // Stop any ongoing speech
+  if (isSpeaking) {
+    window.speechSynthesis.cancel();
+    isSpeaking = false;
+    speakBtn.textContent = '🔊';
+    speakBtn.title = 'Read Answer Aloud';
+    return;
+  }
+
+  currentUtterance = new SpeechSynthesisUtterance(text);
+  currentUtterance.rate = 0.9;
+  currentUtterance.pitch = 1.0;
+  currentUtterance.lang = 'en-US';
+
+  currentUtterance.onstart = () => {
+    isSpeaking = true;
+    speakBtn.textContent = '🔇';
+    speakBtn.title = 'Stop Speaking';
+    speakBtn.classList.add('speaking');
+  };
+
+  currentUtterance.onend = () => {
+    isSpeaking = false;
+    speakBtn.textContent = '🔊';
+    speakBtn.title = 'Read Answer Aloud';
+    speakBtn.classList.remove('speaking');
+  };
+
+  currentUtterance.onerror = () => {
+    isSpeaking = false;
+    speakBtn.textContent = '🔊';
+    speakBtn.title = 'Read Answer Aloud';
+    speakBtn.classList.remove('speaking');
+  };
+
+  window.speechSynthesis.speak(currentUtterance);
+}
 
 // ---------------------------------------------------------------------------
 // Submit query
@@ -158,6 +271,27 @@ queryBtn.addEventListener("click", () => submitQuery(queryInput.value.trim()));
 queryInput.addEventListener("keydown", e => {
   if (e.key === "Enter") submitQuery(queryInput.value.trim());
 });
+
+// Microphone button - Start/Stop voice recognition
+if (micBtn) {
+  micBtn.addEventListener("click", () => {
+    if (isRecording) {
+      recognition.stop();
+    } else {
+      startRecording();
+    }
+  });
+}
+
+// Speaker button - Read answer aloud
+if (speakBtn) {
+  speakBtn.addEventListener("click", () => {
+    const text = answerBox.textContent;
+    if (text) {
+      speakText(text);
+    }
+  });
+}
 
 examplesGrid.addEventListener("click", e => {
   const btn = e.target.closest(".example-btn");
