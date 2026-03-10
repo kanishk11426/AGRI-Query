@@ -99,55 +99,6 @@ body {
 .btn-primary:hover  { background: var(--green-dark); }
 .btn-primary:active { transform: scale(.97); }
 
-/* ---- Microphone Button ---- */
-.btn-mic {
-  padding: .75rem 1rem;
-  background: var(--white);
-  color: var(--green-main);
-  border: 2px solid var(--green-main);
-  border-radius: 8px;
-  font-size: 1.2rem;
-  cursor: pointer;
-  transition: all .2s;
-  min-width: 50px;
-}
-.btn-mic:hover {
-  background: var(--green-pale);
-  transform: scale(1.05);
-}
-.btn-mic.recording {
-  background: #ff5252;
-  border-color: #ff5252;
-  color: var(--white);
-  animation: pulse 1.5s ease-in-out infinite;
-}
-@keyframes pulse {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.1); }
-}
-
-/* ---- Voice Status Indicator ---- */
-.voice-status {
-  display: flex;
-  align-items: center;
-  gap: .6rem;
-  margin-top: .9rem;
-  color: #ff5252;
-  font-weight: 600;
-  font-size: .95rem;
-}
-.pulse-dot {
-  width: 12px;
-  height: 12px;
-  background: #ff5252;
-  border-radius: 50%;
-  animation: pulse-dot 1.5s ease-in-out infinite;
-}
-@keyframes pulse-dot {
-  0%, 100% { opacity: 1; transform: scale(1); }
-  50% { opacity: 0.5; transform: scale(1.2); }
-}
-
 /* ---- Loader ---- */
 .loader {
   display: flex;
@@ -166,6 +117,12 @@ body {
   flex-shrink: 0;
 }
 @keyframes spin { to { transform: rotate(360deg); } }
+
+/* Pulse animation for speaker button */
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+}
 
 /* ---- Example Queries ---- */
 .examples-grid {
@@ -303,6 +260,5 @@ body {
   .logo { font-size: 1.7rem; }
   .query-form { flex-direction: column; }
   .btn-primary { width: 100%; }
-  .btn-mic { width: 100%; }
   .response-header { flex-direction: column; align-items: flex-start; gap: .5rem; }
 }

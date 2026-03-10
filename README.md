@@ -8,7 +8,7 @@ AgriQuery AI is a full-stack application that helps farmers, agronomists, and en
 
 - **Comprehensive Knowledge Graph** with 129 agricultural entities and 366+ relationships covering crops, pests, diseases, and treatments
 - **Natural language query processing** using keyword matching and intent heuristics
-- **Voice Assistance** with speech-to-text input and text-to-speech output for hands-free operation
+- **Offline Voice Assistance** with text-to-speech output for hands-free listening
 - **FastAPI backend** with auto-generated interactive API docs (`/docs`)
 - **Responsive, agriculture-themed frontend** (HTML + CSS + Vanilla JS)
 - **No external dependencies** — runs entirely offline after `pip install`
@@ -124,35 +124,29 @@ start frontend/index.html         # Windows
 
 ---
 
-## 🎤 Voice Assistance
+## 🎤 Voice Assistance (Offline)
 
-AgriQuery AI now includes built-in voice assistance features for hands-free interaction:
+AgriQuery AI includes **fully offline** text-to-speech voice assistance for hands-free listening:
 
-### Speech-to-Text (STT)
-- **Microphone Button (🎤)**: Click the microphone button next to the query input to activate voice recognition
-- **Visual Feedback**: A pulsing red indicator appears when the system is listening
-- **Automatic Submission**: Once your speech is recognized, the query is automatically submitted
-- **Browser Support**: Uses the Web Speech API (works in Chrome, Edge, Safari)
-
-### Text-to-Speech (TTS)
+### Text-to-Speech (TTS) - Fully Offline
 - **Speaker Button (🔊)**: Click the speaker button in the answer section to hear the response read aloud
 - **Toggle Control**: Click again to stop the speech output
 - **Natural Voice**: Uses the browser's built-in speech synthesis for natural-sounding responses
+- **Completely Offline**: Works without any internet connection using your device's built-in voices
 
 ### Usage Tips
-- **Permission Required**: Your browser will ask for microphone access on first use
-- **Clear Speech**: Speak clearly and wait for the recording indicator before asking your question
-- **Quiet Environment**: Works best in environments with minimal background noise
-- **Browser Compatibility**:
-  - Speech Recognition: Chrome, Edge, Safari (desktop and mobile)
-  - Speech Synthesis: All modern browsers
+- **No Internet Required**: Text-to-speech works entirely offline once the page is loaded
+- **Browser Compatibility**: All modern browsers (Chrome, Firefox, Edge, Safari)
+- **Accessible**: Helps users who prefer audio feedback or have visual impairments
+- **Hands-Free Listening**: Listen to answers while working in the field
 
-### Example Voice Queries
-Simply click the microphone button and say:
-- "What fertilizer is best for rice?"
-- "Which pests affect tomato plants?"
-- "Tell me about drip irrigation"
-- "What diseases affect cotton?"
+### Why No Speech-to-Text?
+To maintain the project's commitment to **fully offline operation**, we've excluded speech-to-text (voice input) because:
+- Web Speech API's speech recognition requires internet connectivity in most browsers
+- Adding offline speech recognition would require large ML models (~100MB+)
+- Text input is simple, fast, and works reliably offline
+
+Users can type their queries or use the example query buttons for quick access.
 
 ---
 
