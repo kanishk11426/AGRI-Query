@@ -118,6 +118,12 @@ body {
 }
 @keyframes spin { to { transform: rotate(360deg); } }
 
+/* Pulse animation for speaker button */
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+}
+
 /* ---- Example Queries ---- */
 .examples-grid {
   display: flex;
@@ -137,6 +143,35 @@ body {
 .example-btn:hover { background: var(--green-main); color: var(--white); }
 
 /* ---- Response Section ---- */
+.response-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.btn-speak {
+  padding: .5rem .8rem;
+  background: var(--white);
+  color: var(--green-main);
+  border: 2px solid var(--green-main);
+  border-radius: 8px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: all .2s;
+  min-width: 45px;
+}
+.btn-speak:hover {
+  background: var(--green-pale);
+  transform: scale(1.05);
+}
+.btn-speak.speaking {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--white);
+  animation: pulse 1s ease-in-out infinite;
+}
+
 .answer-box {
   background: var(--green-pale);
   border-left: 4px solid var(--green-main);
@@ -225,4 +260,5 @@ body {
   .logo { font-size: 1.7rem; }
   .query-form { flex-direction: column; }
   .btn-primary { width: 100%; }
+  .response-header { flex-direction: column; align-items: flex-start; gap: .5rem; }
 }

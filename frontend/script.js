@@ -7,6 +7,7 @@ const API_BASE = "http://localhost:8000";
 // ---------------------------------------------------------------------------
 const queryInput       = document.getElementById("queryInput");
 const queryBtn         = document.getElementById("queryBtn");
+const speakBtn         = document.getElementById("speakBtn");
 const loader           = document.getElementById("loader");
 const responseSection  = document.getElementById("responseSection");
 const answerBox        = document.getElementById("answerBox");
@@ -16,6 +17,56 @@ const relationshipsBox = document.getElementById("relationshipsBox");
 const relTableBody     = document.getElementById("relTableBody");
 const statsGrid        = document.getElementById("statsGrid");
 const examplesGrid     = document.getElementById("examplesGrid");
+
+// ---------------------------------------------------------------------------
+// Text-to-Speech Setup (Offline Voice Assistance)
+// ---------------------------------------------------------------------------
+let isSpeaking = false;
+let currentUtterance = null;
+
+function speakText(text) {
+  if (!('speechSynthesis' in window)) {
+    alert('Text-to-speech is not supported in your browser.');
+    return;
+  }
+
+  // Stop any ongoing speech
+  if (isSpeaking) {
+    window.speechSynthesis.cancel();
+    isSpeaking = false;
+    speakBtn.textContent = '🔊';
+    speakBtn.title = 'Read Answer Aloud';
+    return;
+  }
+
+  currentUtterance = new SpeechSynthesisUtterance(text);
+  currentUtterance.rate = 0.9;
+  currentUtterance.pitch = 1.0;
+  currentUtterance.lang = 'en-US';
+
+  currentUtterance.onstart = () => {
+    isSpeaking = true;
+    speakBtn.textContent = '🔇';
+    speakBtn.title = 'Stop Speaking';
+    speakBtn.classList.add('speaking');
+  };
+
+  currentUtterance.onend = () => {
+    isSpeaking = false;
+    speakBtn.textContent = '🔊';
+    speakBtn.title = 'Read Answer Aloud';
+    speakBtn.classList.remove('speaking');
+  };
+
+  currentUtterance.onerror = () => {
+    isSpeaking = false;
+    speakBtn.textContent = '🔊';
+    speakBtn.title = 'Read Answer Aloud';
+    speakBtn.classList.remove('speaking');
+  };
+
+  window.speechSynthesis.speak(currentUtterance);
+}
 
 // ---------------------------------------------------------------------------
 // Submit query
@@ -158,6 +209,16 @@ queryBtn.addEventListener("click", () => submitQuery(queryInput.value.trim()));
 queryInput.addEventListener("keydown", e => {
   if (e.key === "Enter") submitQuery(queryInput.value.trim());
 });
+
+// Speaker button - Read answer aloud (Offline voice assistance)
+if (speakBtn) {
+  speakBtn.addEventListener("click", () => {
+    const text = answerBox.textContent;
+    if (text) {
+      speakText(text);
+    }
+  });
+}
 
 examplesGrid.addEventListener("click", e => {
   const btn = e.target.closest(".example-btn");
